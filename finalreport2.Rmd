@@ -1,0 +1,64 @@
+---
+title: "Finalreport2"
+author: "Kelly Douglas"
+date: "November 21, 2019"
+output: html_document
+---
+
+```{r include=FALSE,echo=FALSE}
+require(tidyverse)
+require(tigerstats)
+avast <-read.csv(file="avastivironal.csv",header=TRUE)
+avastm <- filter(avast,sex=="guy")
+```
+
+# Introduction
+
+For this test I will be seeing if the new drug for aides is affected based on if you are a female. Are more females getting Aides with the drug or not? 
+$H_0$: There is no correlation between a person being a male and them having the medication work to not get Aids.
+$H_A$: If a person is a male then the drug will work for them.
+
+A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. Finish this!
+
+# Methods
+For this question I will be using the barchart and chisq test and the fisher test to decide if there is a correlation between being a male and if the new Aides drug works. 
+
+
+#Results
+
+<!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
+
+## Descriptive Results
+
+
+
+### Graphical Descriptive Results
+```{r}
+barchartGC(~infected+treatment,data=avastm,type="percent")
+barchartGC(~infected+treatment,data = avastm)
+```
+Based on the barcharts above the drug is not effective for guys. A higher percentage contracted aids that took the drug than those that took the placebo. 
+
+
+### Numerical Descriptive Results
+```{r}
+table1 <- xtabs(~infected+treatment,data=avastm)
+rowPerc(table1)
+colPerc(table1)
+```
+Based on the table above just about 59% of males on the drug got the disease and only 41% on the placebo contracted it. 
+
+
+
+## Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+Based on the chisq test out of the 5484 that took the drug about 210 got the disease and out of the 5927 that took the placebo only 147 got the disease. 
+
+
+# Discussion and Conclusion
+This drug is not effective for males.The p-value is small. I reject the null hypothesis. The drug is not effective for males that take it.   
+<!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
