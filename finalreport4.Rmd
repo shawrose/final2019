@@ -1,0 +1,62 @@
+---
+title: "finalreport4"
+author: "Kelly Douglas"
+date: "November 26, 2019"
+output: html_document
+---
+
+```{r include=FALSE,echo=FALSE}
+require(tidyverse)
+require(tigerstats)
+avast <-read.csv(file="avastivironal.csv",header=TRUE)
+avastd <- filter(avast,DrugUser=="yes")
+
+```
+# Introduction
+
+For this test I will be seeing if the new drug for aides is affected based on if you are a druguser. Are more drugusers getting Aides with the drug or not? 
+$H_0$: There is no correlation between a person being a druguser and them having the medication work to not get Aids.
+$H_A$: If a person is a druguser then the drug will not work for them.
+
+A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. Finish this!
+
+# Methods
+For this question I will be using the barchart and chisq test and the fisher test to decide if there is a correlation between being a druguser and if the new Aides drug works. 
+
+
+#Results
+
+<!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
+
+## Descriptive Results
+
+
+
+### Graphical Descriptive Results
+```{r}
+barchartGC(~infected+treatment,data=avastd,type="percent")
+barchartGC(~infected+treatment,data = avastd)
+```
+Based on the barchart above less people that took the drug contracted aids than those that took the placebo. About 21% that took the drug got it and about 80% that took the placebo got it that are drugusers. 
+
+
+### Numerical Descriptive Results
+```{r}
+table1 <- xtabs(~infected+treatment,data=avastd)
+rowPerc(table1)
+colPerc(table1)
+```
+
+Based on the table above it shows about 24% of drug users that took the drug got the disease and about 75% of those that took the placebo got the disease. 
+
+
+## Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+Based on the chisq test it shows about 34 drug users on the medication got aids out of the 1143 that took the drug and about 106 out of the 1259 drug users that took the placebo got aids. 
+
+# Discussion and Conclusion
+This drug is effective for drug users.The p-value is small. I reject the null hypothesis. The drug is effective for drug users. 

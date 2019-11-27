@@ -14,7 +14,7 @@ avastm <- filter(avast,sex=="guy")
 
 # Introduction
 
-For this test I will be seeing if the new drug for aides is affected based on if you are a female. Are more females getting Aides with the drug or not? 
+For this test I will be seeing if the new drug for aides is affected based on if you are a male. Are more males getting Aides with the drug or not? 
 $H_0$: There is no correlation between a person being a male and them having the medication work to not get Aids.
 $H_A$: If a person is a male then the drug will work for them.
 

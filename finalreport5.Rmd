@@ -1,0 +1,60 @@
+---
+title: "finalreport5"
+author: "Kelly Douglas"
+date: "November 26, 2019"
+output: html_document
+---
+
+```{r include=FALSE,echo=FALSE}
+require(tidyverse)
+require(tigerstats)
+avast <-read.csv(file="avastivironal.csv",header=TRUE)
+avastl <- filter(avast,LGBTQ=="gay")
+```
+
+# Introduction
+
+For this test I will be seeing if the new drug for aides is affected based on if you are gay. Are more gay people getting Aides with the drug or not? 
+$H_0$: There is no correlation between a person being a gay person and them having the medication work to not get Aids.
+$H_A$: If a person is gay then the drug will not work for them.
+
+A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. Finish this!
+
+# Methods
+For this question I will be using the barchart and chisq test and the fisher test to decide if there is a correlation between being a gay person and if the new Aids drug works. 
+
+#Results
+
+<!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
+
+
+## Descriptive Results
+
+
+### Graphical Descriptive Results
+```{r}
+barchartGC(~infected+treatment,data=avastl,type="percent")
+barchartGC(~infected+treatment,data = avastl)
+```
+Based on the bar chart above the drug is not effective for gay people. More people that took the drug got aids than those that took the placebo.
+
+### Numerical Descriptive Results
+
+```{r}
+table1 <- xtabs(~infected+treatment,data=avastl)
+rowPerc(table1)
+colPerc(table1)
+```
+Based on the table above about 72% of gay people that took the drug got aids based on the 27% that took the placebo that got aids.
+
+## Inferential Results
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+Based on the chisq test about 76 of the gay people out of the 1007 that took the drug got aids and about 29 of the gay people that took the placebo out of the 1046 got aids.
+
+# Discussion and Conclusion
+Based on all the tests and charts that I have done on this the drug is not effective for gay people. More people that took this drug got this disease.

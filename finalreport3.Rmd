@@ -1,0 +1,59 @@
+---
+title: "finalreport3"
+author: "Kelly Douglas"
+date: "November 24, 2019"
+output: html_document
+---
+
+```{r include=FALSE,echo=FALSE}
+require(tidyverse)
+require(tigerstats)
+avast <-read.csv(file="avastivironal.csv",header=TRUE)
+```
+
+
+# Introduction
+
+For this test I will be seeing if the new drug for aides is affected for everyone. Are more people getting Aides with the drug or not? 
+$H_0$: There is no correlation between any person and them having the medication work to not get Aids.
+$H_A$: If any person takes the drug then it will not work for them.
+
+A new  preventative aides (abacavirinol) is under test in clinical trials. Analyze the effectiveness of this drug across the board. Consider population subgroups by gender, drug use, and sexual orientation. Finish this!
+
+# Methods
+For this question I will be using the barchart and chisq test and the fisher test to decide if there is a correlation between taking the new drug and the placebo and if it works to not contract aids. 
+
+
+#Results
+
+<!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
+
+## Descriptive Results
+
+
+
+### Graphical Descriptive Results
+```{r}
+barchartGC(~infected+treatment,data=avast,type="percent")
+barchartGC(~infected+treatment,data = avast)
+```
+Based on the barcharts above the drug is effective for everyone in general. Less people contracted aids that took the drug than those that took the placebo. 
+
+
+### Numerical Descriptive Results
+```{r}
+table1 <- xtabs(~infected+treatment,data=avast)
+rowPerc(table1)
+colPerc(table1)
+```
+Based on the table above about 40% of people that took the drug contracted aids. And about 59% of those that took the placebo got aids. So it is effective overall for all the different people.
+
+
+## Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+Based on the chisq test 423 who took the drug got aids and 612 that took the placebo got aids. So over all for all people this drug worked for the most part. It helped people to not contracted aids
